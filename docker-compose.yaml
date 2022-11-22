@@ -1,17 +1,35 @@
 version: "3"
 services:
+  db:
+    image: postgres:latest
+    hostname: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - postgresVolume:/data/db/postgres
+
   backend:
     container_name: backend
-    image: TecHERE_Backend/techere
+    image: ./TecHERE_Backend/techere
     expose:
       - 8080
     ports:
       - 8080:8080
+    depends_on:
+      - db
 
   nginx:
     container_name: nginx
-    image: NGINX
+    image: ./nginx
     ports:
       - 80:80
     depends_on:
       - backend
+
+volumes:
+  postgresVolume:
