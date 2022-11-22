@@ -1,0 +1,3 @@
+[submodule "TecHERE_Backend"]
+	path = TecHERE_Backend
+	url = https://github.com/TecHERE/TecHERE_Backend.git
