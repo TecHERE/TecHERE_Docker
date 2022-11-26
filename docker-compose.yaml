@@ -41,12 +41,15 @@ services:
   #     - /var/run/docker.sock:/var/run/docker.sock
 
   nginx:
+    image: nginx:latest
     container_name: nginx
-    build: ./nginx
     ports:
       - 80:80
     depends_on:
       - backend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend-repo/build:/usr/share/nginx/html
 
 volumes:
   postgresVolume:
